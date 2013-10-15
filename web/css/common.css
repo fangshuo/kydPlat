@@ -1,0 +1,55 @@
+/***********************
+ zhoufeng 20110214
+ 公共css样式
+***********************/
+
+/**标题**/
+.dbt{
+	mso-style-parent:style0;
+	font-size:20.0pt;
+	font-weight:700;
+	text-align:center;
+}
+
+/**标题**/
+.dbt2{
+	mso-style-parent:style0;
+	font-size:18.0pt;
+	font-weight:700;
+	text-align:center;
+}
+
+.dbt3{
+	mso-style-parent:style0;
+	font-size:12.0pt;
+	font-weight:700;
+	text-align:center;
+}
+.cxth {
+	font-size: 12px;
+	background-color:#D0DBED;    
+	FONT-FAMILY: 宋体;
+}
+
+.sumbit {
+	background-image: url(../images/sumbit.gif) !important;
+}
+
+.query {
+	background-image: url(../images/sumbit.gif) !important;
+}
+.add {
+	background-image: url(../images/sumbit.gif) !important;
+}
+.edit {
+	background-image: url(../images/sumbit.gif) !important;
+}
+.delete {
+	background-image: url(../images/sumbit.gif) !important;
+}
+.reset {
+	background-image: url(../images/sumbit.gif) !important;
+}
+.print {
+	background-image: url(../images/sumbit.gif) !important;
+}

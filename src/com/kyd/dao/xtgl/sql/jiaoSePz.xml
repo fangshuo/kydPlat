@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="jiaoSePz">
+	<typeAlias alias="jiaoSePz" type="com.kyd.model.JiaoSePz" />
+	<typeAlias alias="treeGNS" type="com.kyd.model.TreeGNS" />
+	<select id="getGNS" resultClass="treeGNS" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT * FROM TC_XT_GNS  WHERE PID=#pid# AND XY_BJ='1' ORDER BY ID
+	]]>
+	</select>
+	<select id="getJiaoSeTree" resultClass="jiaoSePz" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT * FROM TC_XT_JS  
+		WHERE P_JS_DM= #id#
+		AND XY_BJ='1' ORDER BY JS_DM
+	]]>
+	</select>
+	
+	<select id="getCheckedMenuTree" resultClass="treeGNS" parameterClass="java.util.Map">
+	<![CDATA[ 
+		SELECT GNS.ID, GNS.SQZL_MC, GNS.ISLEAF, JG.JS_DM FROM TC_XT_JS_GNS JG, TC_XT_GNS GNS
+	  	WHERE GNS.XY_BJ = '1'
+	    AND JG.GN_DM(+) = GNS.ID
+	    AND JG.JS_DM(+) = #jsdm#
+	    AND GNS.PID = #pid#
+    ]]>
+	</select>
+	<select id="queryJsGNSCount" resultClass="int" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT COUNT(1) FROM TC_XT_JS_GNS T WHERE T.JS_DM =#jsdm#
+    ]]>
+	</select>
+	
+	<delete  id="deleteJsGNSByJsdm" parameterClass="java.lang.String" >
+	 	DELETE TC_XT_JS_GNS T WHERE T.JS_DM =#jsdm#
+	</delete>
+	
+	<insert id="insertJsGNS" parameterClass="java.util.Map">
+     <![CDATA[ 
+		INSERT INTO TC_XT_JS_GNS(GN_DM,JS_DM,LR_SJ) VALUES(#menuid:NUMBER#,#jsid:VARCHAR#,SYSDATE)
+	  ]]>
+  	</insert>
+  	<insert id="insertXTJS" parameterClass="java.util.Map">
+     <![CDATA[ 
+		INSERT INTO TC_XT_JS (JS_MC,P_JS_DM,JS_LX,XY_BJ) VALUES(#jsmc#,#sjjsdm#,#jslx#,#xybj#)
+	  ]]>
+  	</insert>
+  	<update id="updateXTJS" parameterClass="java.util.Map">
+         UPDATE TC_XT_JS T SET T.JS_MC =#mc#, T.JS_LX =#leaf# WHERE T.JS_DM = #id#
+	</update>
+	
+	<select id="queryTCXTJS" resultClass="jiaoSePz" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT JS_DM,JS_LX FROM TC_XT_JS  WHERE P_JS_DM= #id#
+    ]]>
+	</select>
+	<delete  id="deleteTCXTJS" parameterClass="java.lang.String" >
+	 	delete TC_XT_JS t where t.js_dm =#id#
+	</delete>
+	<delete  id="deleteTCXTJSGNS" parameterClass="java.lang.String" >
+	 	DELETE TC_XT_JS_GNS T WHERE T.JS_DM =#id#
+	</delete>
+</sqlMap>

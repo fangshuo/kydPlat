@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="tree">
+	<typeAlias alias="treeGNS" type="com.kyd.model.TreeGNS" />
+	<select id="getGNSCount" resultClass="int" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT COUNT(1) FROM TC_XT_GNS WHERE PID =#id# and XY_BJ='1' ORDER BY ID
+	]]>
+	</select>
+	
+	<select id="getAllTrees" resultClass="treeGNS" parameterClass="java.util.Map">
+	<![CDATA[ 
+		SELECT M.*
+		FROM TC_XT_GNS M, TC_XT_JS_GNS JG, TC_XT_JS_USER JU
+		 WHERE M.PID = #id#
+		   AND JU.USER_PID = #user_pid#
+		   AND JU.JS_DM = JG.JS_DM
+		   AND JG.GN_DM = M.ID
+		 ORDER BY M.ID
+	]]>
+	</select>
+</sqlMap>

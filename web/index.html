@@ -1,0 +1,123 @@
+<html>
+	<HEAD>
+		<TITLE>资料录入系统</TITLE>
+		<META http-equiv=Content-Type content="text/html; charset=gb2312">
+		<LINK href="css/a.css" type=text/css rel=stylesheet>
+		<STYLE type=text/css>
+.hLight {
+	color: red;
+}
+
+.cont {
+	MARGIN-left: 20px;
+	font-size: 12px;
+	padding: 12px;
+	width: 95%;
+	border: 1px #C8E2BE solid;
+	background-color: #FFFFFF;
+}
+
+.cont h2 {
+	margin: 14px 0;
+	font-size: 14px;
+	line-height: 25px;
+	color: #FF0000;
+}
+
+.cont p {
+	padding: 0 10px;
+	line-height: 22px;
+	text-indent: 24px;
+}
+
+.cont dl {
+	padding: 20px 0;
+}
+
+.cont dl dt {
+	margin-top: 4px;
+	background: #DAF4B1
+		url(images/arrow.gif)
+		606px -24px no-repeat;
+	line-height: 26px;
+	text-indent: 1em;
+	font-weight: bold;
+	cursor: pointer;
+	width: 100%;
+}
+
+.cont dl dt.on {
+	background-position: 606px 4px;
+}
+
+.cont dl dd {
+	margin-top: 4px;
+	line-height: 20px;
+	text-indent: 29px;
+	display: none;
+}
+
+.cont dl dd a {
+	text-decoration: underline;
+}
+
+.cont dl dd p {
+	margin-left: -5px;
+}
+}
+</STYLE>
+
+	</HEAD>
+	<BODY bgcolor="#D3E1F1" id=page01 >
+
+		<DIV class=mask id=maskDiv
+			style="DISPLAY: none; Z-INDEX: 900; BACKGROUND: #dfe0e1; FILTER: alpha(opacity =   50); LEFT: 0px; WIDTH: 982px; POSITION: absolute; TOP: 0px; HEIGHT: 997px; opacity: 0.5"></DIV>
+		<DIV class=wrapper>
+			<DIV id=main>
+				<DIV class=cont>
+					<H2>
+						快易贷管理系统介绍：
+					</H2>					
+<DL>
+<DT i="0">1. 基本信息 
+<DD style="DISPLAY: block">
+<p>说明：设置系统的基本信息。</p>
+<p> （1）往来单位，根据子客户信息可以查询出响应的往来单位信息。</p>
+<p> （2）商品信息，根据商品类别可以查看响应的商品信息，例如：规格、吨位等信息。</p>
+<p> （3）承运单位</p>
+<p> （4）承运车辆，根据承运单位可以查看相应的承运车辆的车号和车主等信息。</p>
+ </DD>
+<DT i="1" SPAN class=hLight>2. 销售管理 
+<DD style="DISPLAY: block">
+<p>流程一：此菜单主要用于记录销售信息、提发货信息、车辆信息。</p>
+<p> （1）销售单</p>
+<p> （2）发货单</p>
+<p> （3）提货单</p>
+ </DD>
+<DT i="2">3. 查询管理 
+<DD style="DISPLAY: block">
+<p>说明：提供系统响应信息的查询和报表展现。</p>
+ </DD>
+</DL>
+
+					
+				</DIV>
+			</DIV>
+		</DIV>
+
+<SCRIPT>
+(function(){
+ var dt = document.getElementsByTagName('dt');
+ var dd = document.getElementsByTagName('dd');
+ for(var i=0,len = dt.length;i<len;i++){
+    dt[i].i = i;
+    dt[i].onclick = function(){
+	this.className = this.className==='on'?'':'on';
+	dd[this.i].style.display = dd[this.i].style.display==='block'?'':'block';
+	}
+	}
+})();
+</SCRIPT>
+
+	</BODY>
+</html>

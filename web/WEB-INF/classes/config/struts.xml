@@ -1,0 +1,104 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+        "-//Apache Software Foundation//DTD Struts Configuration 2.0//EN"
+        "http://struts.apache.org/dtds/struts-2.0.dtd">
+<struts>
+
+	<constant name="struts.i18n.encoding" value="UTF-8"/>
+
+    <package name="kyd" extends="json-default" namespace="/">
+       <interceptors>
+			<interceptor name="loginInterceptor" class="com.kyd.util.LoginInterceptor"></interceptor>
+			<interceptor-stack name="appStack">
+			<interceptor-ref name="loginInterceptor"/>
+			<interceptor-ref name="defaultStack"/>
+			</interceptor-stack>
+		</interceptors>
+				
+		<global-results>
+			<!-- 下面定义的结果对所有的Action都有效 -->
+		    <result name="input">/Login.html</result>
+			<result name="exception">/error.jsp</result>
+			<result name="success">/main.jsp</result>
+		</global-results>
+
+		<global-exception-mappings>
+			<!-- 指Action抛出Exception异常时，转入名为exception的结果。 -->
+			<exception-mapping exception="java.lang.Exception" result="exception"/>
+		</global-exception-mappings>
+
+		<action name="Login" class="com.kyd.web.action.login.LoginAction">
+		    <result type="json">
+		    </result>
+        </action>
+        
+        	 <!-- 主页 -->
+		 <action name="minjsp" class="com.kyd.web.action.xtgl.MainAction">
+		 	<result type="json" />
+			<result>/main.jsp</result>
+			<interceptor-ref name="appStack"/>
+		</action>
+        
+        <!-- 加载菜单树 --> 
+		<action name="getTree" class="com.kyd.web.action.login.GetTreeAction" method="getTree">
+		<result type="json">
+		 <param name="root">treeList</param> 
+		 </result>
+		 <interceptor-ref name="appStack"/>
+		</action>
+		
+		  <!-- 用户信息管理 --> 
+		<action name="userManager" class="com.kyd.web.action.xtgl.UserManagerAction"  method="userManager">
+		<result type="json"></result>
+		<interceptor-ref name="appStack"/>
+		</action>
+		
+		
+		<action name="userManagerInit" class="com.kyd.web.action.xtgl.UserManagerAction"  method="initPage">
+		<result>/jsp/jxc/xtgl/userManager.jsp</result>
+		<interceptor-ref name="appStack"/>
+		</action>
+		
+	    <action name="userInfoInit" class="com.kyd.web.action.xtgl.UserManagerAction" method="initPage">
+			<result>/jsp/jxc/xtgl/userInfo.jsp</result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		<!-- 角色菜单配置 strat --> 
+		<action name="JiaoSePz" class="com.kyd.web.action.xtgl.JiaoSePzAction" >
+			<result>/jsp/jxc/xtgl/JiaoSePz.jsp</result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		
+		<action name="getJiaoSeTree" class="com.kyd.web.action.xtgl.JiaoSePzAction" >
+			<result type="json"> <param name="root">jiaoSeTreeList</param> </result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		
+		<action name="getMenuTree" class="com.kyd.web.action.xtgl.JiaoSePzAction" >
+			<result type="json"> <param name="root">menuTreeList</param> </result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		
+		 <!-- 角色菜单配置 end--> 
+		 
+		  <!-- 用户角色配置 strat --> 
+		<action name="UserJsGl" class="com.kyd.web.action.xtgl.UserJsGlAction" >
+			<result>/jsp/jxc/xtgl/UserJsGl.jsp</result>
+			<interceptor-ref name="appStack"/>
+		</action>		
+		
+		<action name="getUserJiaoSeTree" class="com.kyd.web.action.xtgl.UserJsGlAction" >
+			<result type="json"> <param name="root">jiaoSeTreeList</param> </result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		
+		<action name="getUserTree" class="com.kyd.web.action.xtgl.UserJsGlAction" >
+			<result type="json"> <param name="root">userTreeList</param> </result>
+			<interceptor-ref name="appStack"/>
+		</action>
+		
+		 <!-- 用户角色配置 end--> 
+		
+    </package> 
+
+</struts>

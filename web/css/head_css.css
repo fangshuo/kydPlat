@@ -1,0 +1,79 @@
+A:link {
+	COLOR: #000000; text-decoration: none
+}
+A:visited {
+	COLOR: #000000; text-decoration: none
+}
+A:hover {
+	COLOR: #000000; text-decoration: none
+}
+
+BODY {
+	FONT-SIZE: 9pt; color: #000000;
+}
+
+#bottomtable{
+	border-left:#1B538E 1px solid;
+	border-top:#1B538E 1px solid;
+	color:#ffffff;
+}
+
+#welcomeinfo{
+	color:#ffffff;
+	FONT-SIZE: 9pt;
+}
+
+#accountinfo{
+	color:#ffffff;
+	font-weight:bold;
+}
+
+#timeinfo{
+	color:#ffffff;
+}
+
+#otherinfo{
+	color:#023A77;
+	padding-top:3px;
+}
+
+#activetitle{
+	padding-left:15px;
+	font-weight:bold;
+	color:#033A7A;
+	background-image:url(menubg.jpg);
+}
+#activearea{
+	border-top:#1B538E 1px solid;
+	border-left:#1B538E 1px solid;
+	border-right:#5BA0EE 1px solid;
+	border-bottom:#5B9EEC 1px solid;
+}
+#activemenus{
+	padding-left:25px;
+	padding-top:10px;
+	color:#466EAC;
+	background-color:#ffffff;
+}
+.mainmenu{
+	padding-left:15px;
+	font-weight:bold;
+	color:#033A7A;
+	border-top:#1B538E 1px solid;
+	border-left:#1B538E 1px solid;
+	border-right:#5BA0EE 1px solid;
+	border-bottom:#5B9EEC 1px solid;
+	height:25px;
+	cursor:hand;
+}
+.mainmenu1{
+	padding-left:15px;
+	font-weight:bold;
+	color:#033A7A;
+	border-top:#1B538E 1px solid;
+	border-left:#1B538E 1px solid;
+	border-right:#5BA0EE 1px solid;
+	border-bottom:#5B9EEC 1px solid;
+	height:25px;
+	cursor:hand;
+}

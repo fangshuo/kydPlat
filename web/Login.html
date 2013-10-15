@@ -1,0 +1,110 @@
+<html>
+<head>
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+	
+	<link href="css/User_Login.css" rel="stylesheet" type="text/css" />
+	<link rel="stylesheet" type="text/css" href="extjs/resources/css/ext-all.css" />
+	
+	<script type="text/javascript"	src="extjs/adapter/ext/ext-base.js"></script>
+	<script type="text/javascript" src="extjs/ext-all.js"></script>	
+	<script type="text/javascript" src="extjs/ext-lang-zh_CN.js"></script>	
+	<script type="text/javascript"	src="javascript/CheckCode.js"></script>
+	<script type="text/javascript"	src="javascript/FullScreen.js"></script>
+	<script type="text/javascript"	src="javascript/Login.js"></script>
+	<title>快易贷管理系统V1.0</title>
+ <script type="text/javascript"	>
+ function tab()   
+ {   
+    if(event.keyCode ==13)   
+    {   
+   document.getElementById("log").click();
+    }   
+ }  
+ 
+ </script>
+</head>
+<body id="userlogin_body" >
+<form id ="form"  method="post">
+
+
+<div id="panSiteFactory" align="center">
+	<br><br>
+    <div id="siteFactoryLogin">
+        <div id="user_login">
+            <dl>
+                <dd id="user_top">
+                    <ul>
+                        <li class="user_top_l"></li>
+                        <li class="user_top_c"></li>
+                        <li class="user_top_r"></li>
+                    </ul>
+                </dd>
+                <dd id="user_main">
+                    <ul>
+                        <li class="user_main_l"></li>
+                        <li class="user_main_c">
+                            <div class="user_main_box">
+                                <ul>
+                                    <li class="user_main_text">
+                                        用户名：
+                                    </li>
+                                    <li class="user_main_input">
+                                        <input name="TxtUserName" type="text" maxlength="20" id="TxtUserName" class="TxtUserNameCssClass" />
+                                    </li>
+                                </ul>
+                                <ul>
+                                    <li class="user_main_text">
+                                        密&nbsp;&nbsp;&nbsp;&nbsp;码：
+                                    </li>
+                                    <li class="user_main_input">
+                                        <input name="TxtPassword" type="password" id="TxtPassword" class="TxtPasswordCssClass" /></li>
+                                </ul>
+                                
+                                <ul>
+                                    <li class="user_main_text">验证码： </li>
+                                    
+                                    <li class="user_main_input">
+                                    
+                                      <input name="vercode" type="text" id="TxtVercode" class="TxtValidateCodeCssClass" onkeydown="tab()"/>
+                                     &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                                     <img src= 'authImg' width ="75px" height = "23px" onclick = "getImage(this)" />
+                               
+                                    </li>
+                                </ul>
+                            </div>
+                        </li>
+                        <li class="user_main_r">
+                        	  <img id="log" src="images/login/user_botton.gif" style="border-width:0px;cursor:hand ;" class="IbtnEnterCssClass"  onclick = "javascript:userLogin()"/>
+                        </li>
+                    </ul>
+                </dd>
+                <dd id="user_bottom">
+                    <ul>
+                        <li class="user_bottom_l"></li>
+                        <li class="user_bottom_c"><span style="margin-top: 40px;"></span> </li>
+                        <li class="user_bottom_r"></li>
+                    </ul>
+                </dd>
+                <dd>
+                    <ul>
+                        <li><font size="4" color="white">快易贷管理系统V1.0</font></li>
+                        <li></li>
+                        <li>请使用IE6及以上版本。建议使用1280*800分辨率</li>
+
+                    </ul>
+                </dd>
+            </dl>
+        </div>
+        <span id="ValrUserName" style="color:Red;display:none;"></span>
+        <span id="ValrPassword" style="color:Red;display:none;"></span>
+        <span id="ValrValidateCode" style="color:Red;display:none;"></span>
+        <div id="ValidationSummary1" style="color:Red;display:none;">
+
+	</div>
+       </div>
+
+</div>
+
+</form>
+</body>
+</html>

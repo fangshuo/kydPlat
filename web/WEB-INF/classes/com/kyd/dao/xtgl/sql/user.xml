@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="user">
+	<typeAlias alias="user" type="com.kyd.model.User" />
+	<!--查询所有USER数量-->
+	<select id="getAllUser" resultClass="int">
+	<![CDATA[ 
+		SELECT COUNT(1)　FROM TC_XT_USER
+	]]>
+	</select>
+	<!-- 删除 -->
+	<delete  id="deleteUser" parameterClass="user" >
+	 	DELETE FROM TC_XT_USER WHERE USER_ID =#user_id#
+	</delete>
+	<!--查询所有USER-->
+	<select id="findAllUser" resultClass="user" parameterClass="user">
+	<![CDATA[ 
+		SELECT USER_ID,USERNAME AS USERS,SEX,EMAIL,PID
+		  FROM (SELECT ROWNUM AS XH,
+		               A.PID,
+		               A.USER_ID,
+		               A.USERNAME,
+		               A.PASSWORD,
+		               A.EMAIL,
+		               A.SEX
+		          FROM TC_XT_USER A
+		         WHERE A.USER_ID LIKE #user_id#
+		           AND A.USER_ID != 'admin')
+		 WHERE XH > #start#
+		   AND XH <= #limit#
+	]]>
+	</select>
+	
+	<select id="getUserByID" resultClass="user" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT PID,USER_ID,USERNAME AS USERS,PASSWORD,SEX,EMAIL FROM TC_XT_USER WHERE USER_ID=#user_id#
+	]]>
+	</select>
+	
+	<select id="findUserByNameAndPass" resultClass="user" parameterClass="java.util.Map">
+	<![CDATA[ 
+		SELECT USER_ID FROM TC_XT_USER WHERE USER_ID=#user# AND PASSWORD=#pass#
+	]]>
+	</select>
+	<select id="findUserIdAndPass" resultClass="user" parameterClass="java.util.Map">
+	<![CDATA[ 
+		SELECT USER_ID FROM TC_XT_USER WHERE USER_ID=#user_id# AND PASSWORD=#pass#
+	]]>
+	</select>
+	
+	 <insert id="saveUser" parameterClass="user">
+     <![CDATA[ 
+		INSERT INTO TC_XT_USER(PID,USER_ID,USERNAME,PASSWORD,EMAIL,SEX)
+		 VALUES(sys_guid(),#user_id:VARCHA#,#user:VARCHAR#,#pass:VARCHAR#,"email:VARCHA","sex:NUMBER")	   
+	  ]]>
+  	</insert>
+  	
+  	<update id="updateUser" parameterClass="user">
+         UPDATE TC_XT_USER SET USER_ID =#user_id#,USERNAME =#user#,EMAIL =#email#,SEX =#sex#
+		 WHERE PID = #pid#
+	</update>
+	
+	<update id="updatePass" parameterClass="user">
+         UPDATE TC_XT_USER SET PASSWORD =#xpass#
+		 WHERE USER_ID = #user_id#
+	</update>
+</sqlMap>

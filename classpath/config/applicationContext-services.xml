@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE beans PUBLIC "-//SPRING//DTD BEAN//EN" " http://www.springframework.org/dtd/spring-beans.dtd">
+
+<beans>
+    <!-- 用户信息 -->
+    <bean id="userDao" parent="abstracDao" class="com.kyd.dao.xtgl.impl.UserDaoImpl"/>	
+	<bean id="userManagerService" class="com.kyd.service.xtgl.impl.UserManagerImpl">
+		<property name="userDao" ref="userDao"/>
+	</bean>
+	<!-- 获取菜单树 -->
+	<bean id="treeDao" parent="abstracDao" class="com.kyd.dao.xtgl.impl.TreeDaoImpl"/>	
+	<bean id="treeManagerService" class="com.kyd.service.xtgl.impl.TreeManagerImpl">
+		<property name="treeDao" ref="treeDao"/>
+	</bean>
+	<!-- 角色菜单配置-->
+	<bean id="jiaoSePzdao" parent="abstracDao" class="com.kyd.dao.xtgl.impl.JiaoSePzDaoImpl"/>	
+    <bean id="jiaoSePzService" class="com.kyd.service.xtgl.impl.JiaoSePzServiceImpl">
+    	<property name="jiaoSePzdao" ref="jiaoSePzdao"/>
+    </bean>
+    <!-- 用户角色配置-->
+    <bean id="userJsGlDao" parent="abstracDao" class="com.kyd.dao.xtgl.impl.UserJsGlDaoImpl"/>	
+    <bean id="userJsGlService" class="com.kyd.service.xtgl.impl.UserJsGlServiceImpl">
+    	<property name="userJsGlDao" ref="userJsGlDao"/>
+    </bean>
+</beans>

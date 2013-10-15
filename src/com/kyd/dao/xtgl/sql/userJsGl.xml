@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE sqlMap PUBLIC "-//ibatis.apache.org//DTD SQL Map 2.0//EN"
+    "http://ibatis.apache.org/dtd/sql-map-2.dtd">
+<sqlMap namespace="userJsGl">
+	<typeAlias alias="xtUser" type="com.kyd.model.XtUser" />
+	<typeAlias alias="jiaoSePz" type="com.kyd.model.JiaoSePz" />
+	<select id="queryJiaoSePz" resultClass="jiaoSePz" parameterClass="java.util.Map">
+	<![CDATA[ 
+		SELECT J.JS_DM, J.JS_MC, J.JS_LX, J.P_JS_DM, DZ.JS_DM AS XY_BJ FROM TC_XT_JS_USER DZ, TC_XT_JS J
+		WHERE DZ.JS_DM(+) = J.JS_DM 
+			AND DZ.USER_PID(+) = #userid# 
+			AND J.P_JS_DM = #id# 
+			ORDER BY J.P_JS_DM
+	]]>
+	</select>
+	
+	<select id="queryTCXTUSER" resultClass="xtUser">
+	<![CDATA[ 
+		SELECT T.USERNAME,T.PID  FROM TC_XT_USER T
+	]]>
+	</select>
+	<select id="queryJiaoSeTree" resultClass="jiaoSePz" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT * FROM TC_XT_JS  
+		WHERE P_JS_DM= #id#
+		AND XY_BJ='1' ORDER BY JS_DM
+	]]>
+	</select>
+	<select id="queryXTJSUSERCount" resultClass="int" parameterClass="java.lang.String">
+	<![CDATA[ 
+		SELECT COUNT(*) FROM TC_XT_JS_USER T WHERE T.USER_PID =#userid#
+    ]]>
+	</select>
+	<delete  id="deleteXTJSUSERById" parameterClass="java.lang.String" >
+	 	delete TC_XT_JS_USER t where t.user_pid =#userid#
+	</delete>
+	<insert id="insertXTJSUSER" parameterClass="java.util.Map">
+     <![CDATA[ 
+		INSERT INTO TC_XT_JS_USER(JS_DM,USER_PID,LR_SJ) VALUES(#jsid:VARCHAR#,#userid:VARCHAR#,SYSDATE)
+	  ]]>
+  	</insert>
+</sqlMap>

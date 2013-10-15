@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="GBK"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<!-- 定义数据源Bean，使用C3P0数据源实现 -->
+	<bean id="propertyConfigurer" class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+		<property name="location" value="classpath:config/jdbc.properties"></property>
+	</bean>
+	
+	<!-- 数据库连接池 -->
+	<bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
+		destroy-method="close">
+		<property name="driverClassName" value="${jdbc.driverClassName}" />
+		<property name="url" value="${jdbc.url}" />
+		<property name="username" value="${jdbc.username}" />
+		<property name="password" value="${jdbc.password}" />
+	</bean>
+	
+ 
+    
+     <bean id="jdbcTemplate"
+		class="org.springframework.jdbc.core.JdbcTemplate">
+		<property name="dataSource" ref="dataSource" />
+	</bean>
+	<!-- 事务管理类 start-->
+    <bean id="transactionManager" class="org.springframework.jdbc.datasource.DataSourceTransactionManager"> 
+        <property name="dataSource"> 
+            <ref bean="dataSource"/> 
+        </property>    
+    </bean>
+    <!-- 事务拦截器 -->
+	<bean id="transactionInterceptor"
+		class="org.springframework.transaction.interceptor.TransactionInterceptor">
+		<property name="transactionManager" ref="transactionManager" />
+		<property name="transactionAttributes">
+			<props>
+				 <prop key="query*">PROPAGATION_REQUIRED,readOnly</prop>
+				 <prop key="add*">PROPAGATION_REQUIRED,-Exception</prop>  
+                 <prop key="del*">PROPAGATION_REQUIRED,-Exception</prop>  
+                 <prop key="update*">PROPAGATION_REQUIRED,-Exception</prop> 
+                 <prop key="*">PROPAGATION_REQUIRED</prop> 
+			</props>
+		</property>
+	</bean>
+	
+	<!-- 事务拦截自动代理 -->
+	<bean id="autoProxyCreator"
+		class="org.springframework.aop.framework.autoproxy.BeanNameAutoProxyCreator">
+		<property name="beanNames">
+			<list>
+				<!-- 定义所有 Service Bean 均要被拦截 -->
+				<value>*Service</value>
+			</list>
+		</property>
+		<property name="interceptorNames">
+			<list>
+				<!-- 拦截器 -->
+				<value>transactionInterceptor</value>
+			</list>
+		</property>
+	</bean> 
+    <!-- 事务管理类 end-->
+	<!-- spring操作clob数据 -->
+    <bean id="nativeJdbcExtractor"
+		class="org.springframework.jdbc.support.nativejdbc.CommonsDbcpNativeJdbcExtractor"
+		lazy-init="true" />
+	<bean id="oracleLobHandler" class="org.springframework.jdbc.support.lob.OracleLobHandler"
+		lazy-init="true">
+		<property name="nativeJdbcExtractor">
+			<ref local="nativeJdbcExtractor" />
+		</property>
+	</bean> 
+	<bean id="defaultLobHandler"  
+		class="org.springframework.jdbc.support.lob.DefaultLobHandler"  
+		lazy-init="true">
+	</bean>
+	
+	<!-- Ibatis配置文件及关联数据源 -->
+	<bean id="sqlMapClient" class="org.springframework.orm.ibatis.SqlMapClientFactoryBean">
+		<property name="configLocation" value="classpath:config/sqlMapConfig.xml" />
+		<!-- 自动加载sql-mapping文件 -->
+		<property name="dataSource" ref="dataSource" />
+		<property name="lobHandler">
+			<ref local="defaultLobHandler" />
+		</property> 
+	</bean>
+	<bean id="abstracDao" abstract="true">
+	    <property name="sqlMapClient" ref="sqlMapClient" />
+	</bean>
+	
+</beans>
