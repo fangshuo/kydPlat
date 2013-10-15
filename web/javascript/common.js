@@ -24,7 +24,7 @@
 function formatNambToDouble(value)
 {
 	return Number(value).toFixed(2);
-}　
+}
 
 /**
  * 将数字格式化成#.## 并重新赋值
@@ -45,7 +45,7 @@ function checkedAndFromt(obj)
 		obj.value = "";
 		return false;
 	}
-}　
+}
 
 
 
